@@ -1,0 +1,12 @@
+/* Add any specific styles for the card */
+.responsive-card {
+  width: 250px;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .responsive-card {
+    width: 100%;
+    max-width: 250px;
+  }
+}
