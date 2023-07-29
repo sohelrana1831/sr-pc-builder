@@ -4,8 +4,9 @@ import {
   EllipsisOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import { Avatar, Card, Col, Image, Rate, Row } from "antd";
-
+import { Avatar, Button, Card, Col, Image, Rate, Row, Typography } from "antd";
+import router from "next/router";
+const { Title, Text } = Typography;
 const { Meta } = Card;
 
 const FeaturedProductCard = ({
@@ -20,9 +21,11 @@ const FeaturedProductCard = ({
     style={{ marginTop: "8px" }}
     className="responsive-card"
     cover={<Image alt={productName} src={imageSrc} />}
-    actions={[<div>{status}</div>, <div>Add To Build</div>]}
+    actions={[<Text type="success">{status}</Text>, <div>Add To Build</div>]}
   >
-    <h1>{productName?.slice(0, 26)}</h1>
+    <Button type="text" onClick={() => router.push(`/product/${productName}`)}>
+      {productName?.slice(0, 26)}
+    </Button>
     <Row>
       <Col span={16}>
         {category}

@@ -1,10 +1,15 @@
 import HomeSlider from "@/components/home/HomeSlider";
 import RootLayouts from "@/components/layouts/RootLayouts";
 import ProductCard from "@/components/products/FeaturedProductCard";
-import { Card, Col, Row } from "antd";
-
+import { Button, Card, Col, Row } from "antd";
+import router from "next/router";
 const style = {
   padding: "2px 0",
+};
+
+const gridStyle = {
+  width: "33.33%",
+  textAlign: "center",
 };
 
 const featuredProduct = [
@@ -44,11 +49,42 @@ const featuredProduct = [
   {},
 ];
 
+const categoryOption = [
+  {
+    key: "1",
+    id: "1",
+    link: "cpu-processor",
+    category: "CPU / Processor",
+  },
+  { key: "2", id: "2", link: "motherboard", category: "Motherboard" },
+  { key: "3", id: "3", link: "RAM", category: "RAM" },
+  {
+    key: "4",
+    id: "4",
+    link: "power-supply-unit",
+    category: "Power Supply Unit",
+  },
+  { key: "5", id: "5", link: "storage-device", category: "Storage Device" },
+  { key: "6", id: "6", link: "monitor", category: "Monitor" },
+];
 export default function Home() {
   return (
     <>
       <HomeSlider />
-      <Card title="Featured Products">
+      <Card style={{ marginTop: "8px" }} title="Categories">
+        {categoryOption.map((item) => (
+          <Card.Grid style={gridStyle}>
+            <Button
+              type="text"
+              onClick={() => router.push(`/category/${item.link}`)}
+              key={item.key}
+            >
+              {item.category}
+            </Button>
+          </Card.Grid>
+        ))}
+      </Card>
+      <Card style={{ marginTop: "8px" }} title="Featured Products">
         <Row
           gutter={{
             xs: 8,
