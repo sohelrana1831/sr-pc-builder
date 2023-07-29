@@ -1,8 +1,7 @@
 import React from "react";
 import { Affix, Breadcrumb, Button, Dropdown, Layout, Menu, theme } from "antd";
-
 import { DownOutlined } from "@ant-design/icons";
-import Link from "next/link";
+import router from "next/router";
 
 const { Header, Content, Footer } = Layout;
 // Sample menu items
@@ -11,20 +10,35 @@ const menuItems = [
   { key: "2", title: "About", link: "/about" },
   { key: "3", title: "Contact", link: "/contact" },
 ];
-const dropdownOption = [
-  { key: "1", title: "CPU / Processor" },
-  { key: "2", title: "Motherboard" },
-  { key: "3", title: "RAM" },
-  { key: "4", title: "Power Supply Unit" },
-  { key: "5", title: "Storage Device" },
-  { key: "6", title: "Monitor" },
+const categoryOption = [
+  {
+    key: "1",
+    id: "1",
+    link: "cpu-processor",
+    category: "CPU / Processor",
+  },
+  { key: "2", id: "2", link: "motherboard", category: "Motherboard" },
+  { key: "3", id: "3", link: "RAM", category: "RAM" },
+  {
+    key: "4",
+    id: "4",
+    link: "power-supply-unit",
+    category: "Power Supply Unit",
+  },
+  { key: "5", id: "5", link: "storage-device", category: "Storage Device" },
+  { key: "6", id: "6", link: "monitor", category: "Monitor" },
 ];
 
 // Sample dropdown menu items
 const dropdownMenu = (
   <Menu>
-    {dropdownOption.map((item) => (
-      <Menu.Item key={item.key}>{item.title}</Menu.Item>
+    {categoryOption.map((item) => (
+      <Menu.Item
+        onClick={() => router.push(`/category/${item.link}`)}
+        key={item.key}
+      >
+        {item.category}
+      </Menu.Item>
     ))}
   </Menu>
 );
@@ -51,7 +65,12 @@ const RootLayouts = ({ children }) => {
             defaultSelectedKeys={["1"]}
           >
             {menuItems.map((item) => (
-              <Menu.Item key={item.key}>{item.title}</Menu.Item>
+              <Menu.Item
+                onClick={() => router.push(`/${item.link}`)}
+                key={item.key}
+              >
+                {item.title}
+              </Menu.Item>
             ))}
             <Menu.Item key="dropdown">
               <Dropdown overlay={dropdownMenu}>
@@ -61,7 +80,9 @@ const RootLayouts = ({ children }) => {
               </Dropdown>
             </Menu.Item>
             <Menu.Item className="float-right">
-              <Button>PC Builder</Button>
+              <Button onClick={() => router.push("/pc-builder")}>
+                PC Builder
+              </Button>
             </Menu.Item>
           </Menu>
         </Header>
