@@ -1,0 +1,366 @@
+[
+  {
+    "Image": "image1.jpg",
+    "id": 1,
+    "Product Name": "CPU 1",
+    "Category": "CPU / Processor",
+    "Status": "In Stock",
+    "Price": 199.99,
+    "Description": "High-performance CPU for gaming and multitasking.",
+    "Key Features": {
+      "Brand": "Intel",
+      "Model": "Core i7",
+      "Specification": "8 cores, 16 threads",
+      "Socket": "LGA1200"
+    },
+    "Individual Rating": 4.5,
+    "Average Rating": 4.3,
+    "Reviews": 15
+  },
+  {
+    "Image": "image2.jpg",
+    "id": 2,
+    "Product Name": "Motherboard 1",
+    "Category": "Motherboard",
+    "Status": "In Stock",
+    "Price": 129.99,
+    "Description": "High-quality motherboard for gaming PCs.",
+    "Key Features": {
+      "Brand": "ASUS",
+      "Model": "ROG Strix Z590-E",
+      "Specification": "ATX Form Factor",
+      "Socket": "LGA1200",
+      "RAM Slots": "4 DDR4 slots"
+    },
+    "Individual Rating": 4.8,
+    "Average Rating": 4.6,
+    "Reviews": 20
+  },
+  {
+    "Image": "image3.jpg",
+    "id": 3,
+    "Product Name": "RAM 1",
+    "Category": "RAM",
+    "Status": "In Stock",
+    "Price": 79.99,
+    "Description": "High-speed DDR4 RAM for smooth performance.",
+    "Key Features": {
+      "Brand": "Corsair",
+      "Model": "Vengeance RGB Pro",
+      "Specification": "16GB (2x8GB) 3200MHz",
+      "Type": "DDR4"
+    },
+    "Individual Rating": 4.7,
+    "Average Rating": 4.4,
+    "Reviews": 18
+  },
+  {
+    "Image": "image4.jpg",
+    "id": 4,
+    "Product Name": "Power Supply 1",
+    "Category": "Power Supply Unit",
+    "Status": "In Stock",
+    "Price": 89.99,
+    "Description": "Reliable power supply with high efficiency.",
+    "Key Features": {
+      "Brand": "EVGA",
+      "Model": "SuperNOVA 750 G5",
+      "Specification": "750W, 80+ Gold Certified",
+      "Modular": "Fully Modular"
+    },
+    "Individual Rating": 4.9,
+    "Average Rating": 4.8,
+    "Reviews": 25
+  },
+  {
+    "Image": "image5.jpg",
+    "id": 5,
+    "Product Name": "SSD 1",
+    "Category": "Storage Device",
+    "Status": "In Stock",
+    "Price": 109.99,
+    "Description": "Fast and reliable SSD for storing your data.",
+    "Key Features": {
+      "Brand": "Samsung",
+      "Model": "860 EVO",
+      "Specification": "500GB, SATA III",
+      "Form Factor": "2.5-inch"
+    },
+    "Individual Rating": 4.6,
+    "Average Rating": 4.3,
+    "Reviews": 17
+  },
+  {
+    "Image": "image6.jpg",
+    "id": 6,
+    "Product Name": "Monitor 1",
+    "Category": "Monitor",
+    "Status": "In Stock",
+    "Price": 249.99,
+    "Description": "High-quality gaming monitor with fast refresh rate.",
+    "Key Features": {
+      "Brand": "LG",
+      "Model": "27GL850-B",
+      "Specification": "27-inch, 1440p, 144Hz",
+      "Panel Type": "IPS"
+    },
+    "Individual Rating": 4.8,
+    "Average Rating": 4.7,
+    "Reviews": 22
+  },
+  {
+    "Image": "image7.jpg",
+    "id": 7,
+    "Product Name": "CPU 2",
+    "Category": "CPU / Processor",
+    "Status": "Out of stock",
+    "Price": 149.99,
+    "Description": "Budget-friendly CPU for everyday computing.",
+    "Key Features": {
+      "Brand": "AMD",
+      "Model": "Ryzen 5 3600",
+      "Specification": "6 cores, 12 threads",
+      "Socket": "AM4"
+    },
+    "Individual Rating": 4.3,
+    "Average Rating": 4.2,
+    "Reviews": 12
+  },
+  {
+    "Image": "image8.jpg",
+    "id": 8,
+    "Product Name": "Motherboard 2",
+    "Category": "Motherboard",
+    "Status": "In Stock",
+    "Price": 89.99,
+    "Description": "Affordable motherboard for budget builds.",
+    "Key Features": {
+      "Brand": "GIGABYTE",
+      "Model": "B450M DS3H",
+      "Specification": "Micro ATX Form Factor",
+      "Socket": "AM4",
+      "RAM Slots": "4 DDR4 slots"
+    },
+    "Individual Rating": 4.2,
+    "Average Rating": 4.0,
+    "Reviews": 10
+  },
+  {
+    "Image": "image9.jpg",
+    "id": 9,
+    "Product Name": "RAM 2",
+    "Category": "RAM",
+    "Status": "Out of stock",
+    "Price": 59.99,
+    "Description": "Budget-friendly DDR4 RAM for basic computing.",
+    "Key Features": {
+      "Brand": "Crucial",
+      "Model": "Ballistix 8GB",
+      "Specification": "8GB 2666MHz",
+      "Type": "DDR4"
+    },
+    "Individual Rating": 4.0,
+    "Average Rating": 3.9,
+    "Reviews": 8
+  },
+  {
+    "Image": "image10.jpg",
+    "id": 10,
+    "Product Name": "Power Supply 2",
+    "Category": "Power Supply Unit",
+    "Status": "In Stock",
+    "Price": 69.99,
+    "Description": "Entry-level power supply for basic systems.",
+    "Key Features": {
+      "Brand": "Cooler Master",
+      "Model": "MWE 500",
+      "Specification": "500W, 80+ White Certified",
+      "Modular": "Non-Modular"
+    },
+    "Individual Rating": 4.1,
+    "Average Rating": 4.0,
+    "Reviews": 9
+  },
+  {
+    "Image": "image11.jpg",
+    "id": 11,
+    "Product Name": "SSD 2",
+    "Category": "Storage Device",
+    "Status": "In Stock",
+    "Price": 79.99,
+    "Description": "Entry-level SSD for faster boot times.",
+    "Key Features": {
+      "Brand": "Western Digital",
+      "Model": "Blue 250GB",
+      "Specification": "250GB, SATA III",
+      "Form Factor": "2.5-inch"
+    },
+    "Individual Rating": 4.6,
+    "Average Rating": 4.3,
+    "Reviews": 17
+  },
+  {
+    "Image": "image12.jpg",
+    "id": 12,
+    "Product Name": "Monitor 2",
+    "Category": "Monitor",
+    "Status": "In Stock",
+    "Price": 179.99,
+    "Description": "Affordable monitor for everyday use.",
+    "Key Features": {
+      "Brand": "AOC",
+      "Model": "24B1H",
+      "Specification": "23.6-inch, 1080p, 60Hz",
+      "Panel Type": "VA"
+    },
+    "Individual Rating": 4.3,
+    "Average Rating": 4.1,
+    "Reviews": 11
+  },
+  {
+    "Image": "image13.jpg",
+    "id": 13,
+    "Product Name": "CPU 3",
+    "Category": "CPU / Processor",
+    "Status": "In Stock",
+    "Price": 299.99,
+    "Description": "High-end CPU for professional workloads.",
+    "Key Features": {
+      "Brand": "AMD",
+      "Model": "Ryzen 9 5950X",
+      "Specification": "16 cores, 32 threads",
+      "Socket": "AM4"
+    },
+    "Individual Rating": 4.9,
+    "Average Rating": 4.8,
+    "Reviews": 30
+  },
+  {
+    "Image": "image14.jpg",
+    "id": 14,
+    "Product Name": "Motherboard 3",
+    "Category": "Motherboard",
+    "Status": "In Stock",
+    "Price": 199.99,
+    "Description": "Feature-packed motherboard for content creators.",
+    "Key Features": {
+      "Brand": "MSI",
+      "Model": "MEG X570 UNIFY",
+      "Specification": "ATX Form Factor",
+      "Socket": "AM4",
+      "RAM Slots": "4 DDR4 slots"
+    },
+    "Individual Rating": 4.7,
+    "Average Rating": 4.5,
+    "Reviews": 24
+  },
+  {
+    "Image": "image15.jpg",
+    "id": 15,
+    "Product Name": "RAM 3",
+    "Category": "RAM",
+    "Status": "Out of stock",
+    "Price": 129.99,
+    "Description": "High-capacity DDR4 RAM for content creation.",
+    "Key Features": {
+      "Brand": "G.Skill",
+      "Model": "Trident Z RGB",
+      "Specification": "32GB (2x16GB) 3200MHz",
+      "Type": "DDR4"
+    },
+    "Individual Rating": 4.8,
+    "Average Rating": 4.6,
+    "Reviews": 21
+  },
+  {
+    "Image": "image16.jpg",
+    "id": 16,
+    "Product Name": "Power Supply 3",
+    "Category": "Power Supply Unit",
+    "Status": "In Stock",
+    "Price": 139.99,
+    "Description": "High-wattage power supply for gaming rigs.",
+    "Key Features": {
+      "Brand": "Seasonic",
+      "Model": "Focus GX-850",
+      "Specification": "850W, 80+ Gold Certified",
+      "Modular": "Fully Modular"
+    },
+    "Individual Rating": 4.9,
+    "Average Rating": 4.8,
+    "Reviews": 26
+  },
+  {
+    "Image": "image17.jpg",
+    "id": 17,
+    "Product Name": "SSD 3",
+    "Category": "Storage Device",
+    "Status": "In Stock",
+    "Price": 89.99,
+    "Description": "High-performance NVMe SSD for gaming.",
+    "Key Features": {
+      "Brand": "WD Black",
+      "Model": "SN750",
+      "Specification": "500GB, M.2 NVMe",
+      "Form Factor": "M.2 2280"
+    },
+    "Individual Rating": 4.7,
+    "Average Rating": 4.5,
+    "Reviews": 23
+  },
+  {
+    "Image": "image18.jpg",
+    "id": 18,
+    "Product Name": "Monitor 3",
+    "Category": "Monitor",
+    "Status": "In Stock",
+    "Price": 299.99,
+    "Description": "High-refresh-rate monitor for esports enthusiasts.",
+    "Key Features": {
+      "Brand": "BenQ",
+      "Model": "XL2411K",
+      "Specification": "24-inch, 1080p, 144Hz",
+      "Panel Type": "TN"
+    },
+    "Individual Rating": 4.6,
+    "Average Rating": 4.4,
+    "Reviews": 19
+  },
+  {
+    "Image": "image19.jpg",
+    "id": 19,
+    "Product Name": "CPU 4",
+    "Category": "CPU / Processor",
+    "Status": "Out of stock",
+    "Price": 179.99,
+    "Description": "Mid-range CPU for balanced performance.",
+    "Key Features": {
+      "Brand": "AMD",
+      "Model": "Ryzen 7 5800X",
+      "Specification": "8 cores, 16 threads",
+      "Socket": "AM4"
+    },
+    "Individual Rating": 4.4,
+    "Average Rating": 4.2,
+    "Reviews": 14
+  },
+  {
+    "Image": "image20.jpg",
+    "id": 20,
+    "Product Name": "Motherboard 4",
+    "Category": "Motherboard",
+    "Status": "In Stock",
+    "Price": 149.99,
+    "Description": "Versatile motherboard for productivity and gaming.",
+    "Key Features": {
+      "Brand": "ASRock",
+      "Model": "B550 Pro4",
+      "Specification": "ATX Form Factor",
+      "Socket": "AM4",
+      "RAM Slots": "4 DDR4 slots"
+    },
+    "Individual Rating": 4.5,
+    "Average Rating": 4.3,
+    "Reviews": 16
+  }
+]
