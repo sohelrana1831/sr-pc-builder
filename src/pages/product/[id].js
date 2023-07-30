@@ -5,7 +5,7 @@ import RootLayouts from "@/components/layouts/RootLayouts";
 
 const { Title, Text } = Typography;
 
-const ProductDetailPage = () => {
+const ProductDetailPage = ({ product }) => {
   return (
     <Card style={{ maxWidth: 1400, margin: "20px auto" }}>
       <Row gutter={24}>
@@ -17,20 +17,17 @@ const ProductDetailPage = () => {
           />
         </Col>
         <Col span={12}>
-          <Title level={3}>Product Name</Title>
-          <Text>Category</Text>
+          <Title level={3}>{product?.productName}</Title>
+          <Text>{product?.category}</Text>
           <br />
           <Text strong>Status: </Text>
-          <Text type="success">In Stock</Text>
+          <Text type="success">{product?.status}</Text>
           <br />
           <Text strong>Price: </Text>
-          <Text>$99.99</Text>
+          <Text>$ {product?.price}</Text>
           <br />
           <Text>Description:</Text>
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et
-            risus quam.
-          </Text>
+          <Text>{product?.description}</Text>
         </Col>
       </Row>
       <div style={{ padding: "20px" }}>
@@ -39,17 +36,12 @@ const ProductDetailPage = () => {
         <List
           size="small"
           bordered
-          dataSource={[
-            "Brand",
-            "Model",
-            "Specification",
-            "Port",
-            "Type",
-            "Resolution",
-            "Voltage",
-            /* Add more features as needed */
-          ]}
-          renderItem={(item) => <List.Item>{item}</List.Item>}
+          dataSource={[product?.keyFeatures]}
+          renderItem={(item) => (
+            <List.Item>
+              <strong>{item.key}:</strong> {item.value}
+            </List.Item>
+          )}
         />
         <div style={{ marginTop: "20px" }}>
           <Text strong>Individual Rating: </Text>
@@ -72,4 +64,34 @@ export default ProductDetailPage;
 
 ProductDetailPage.getLayout = function getLayout(page) {
   return <RootLayouts>{page}</RootLayouts>;
+};
+
+// export async function getStaticPaths() {
+//   const res = await fetch("http://localhost:3004/");
+//   const products = await res.json();
+//   console.log(products);
+
+//   // Get the paths we want to prerender based on posts
+//   // In production environments, prerender all pages
+//   // (slower builds, but faster initial page load)
+//   const paths = products.map((product) => ({
+//     params: { id: product.id },
+//   }));
+
+//   // { fallback: false } means other routes should 404
+//   return { paths, fallback: false };
+// }
+
+export const getServerSideProps = async (context) => {
+  const { params } = context;
+  const res = await fetch(`http://localhost:3004/productData/${params.id}`);
+  const data = await res.json();
+  // console.log(data);
+
+  return {
+    props: {
+      product: data,
+    },
+    revalidate: 10,
+  };
 };

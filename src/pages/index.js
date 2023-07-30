@@ -12,42 +12,42 @@ const gridStyle = {
   textAlign: "center",
 };
 
-const featuredProduct = [
-  {
-    imageSrc:
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-    productName:
-      "AMD Athlon 200GE AM4 Socket Desktop Processor with Radeon Vega 3 Graphics",
-    category: "Desktop Processor",
-    price: 49.99,
-    status: "In Stock",
-    rating: 4.5,
-  },
-  {
-    imageSrc:
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-    productName: "AMD Athlon 200GE AM4",
-    category: "Desktop Processor",
-    price: 49.99,
-    status: "In Stock",
-    rating: 4.5,
-  },
-  {
-    imageSrc:
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-    productName:
-      "AMD Athlon 200GE AM4 Socket Desktop Processor with Radeon Vega 3 Graphics",
-    category: "Desktop Processor",
-    price: 49.99,
-    status: "In Stock",
-    rating: 4.5,
-  },
-  {},
-  {},
-  {},
-  {},
-  {},
-];
+// const featuredProduct = [
+//   {
+//     imageSrc:
+//       "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+//     productName:
+//       "AMD Athlon 200GE AM4 Socket Desktop Processor with Radeon Vega 3 Graphics",
+//     category: "Desktop Processor",
+//     price: 49.99,
+//     status: "In Stock",
+//     rating: 4.5,
+//   },
+//   {
+//     imageSrc:
+//       "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+//     productName: "AMD Athlon 200GE AM4",
+//     category: "Desktop Processor",
+//     price: 49.99,
+//     status: "In Stock",
+//     rating: 4.5,
+//   },
+//   {
+//     imageSrc:
+//       "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+//     productName:
+//       "AMD Athlon 200GE AM4 Socket Desktop Processor with Radeon Vega 3 Graphics",
+//     category: "Desktop Processor",
+//     price: 49.99,
+//     status: "In Stock",
+//     rating: 4.5,
+//   },
+//   {},
+//   {},
+//   {},
+//   {},
+//   {},
+// ];
 
 const categoryOption = [
   {
@@ -67,7 +67,7 @@ const categoryOption = [
   { key: "5", id: "5", link: "storage-device", category: "Storage Device" },
   { key: "6", id: "6", link: "monitor", category: "Monitor" },
 ];
-export default function Home() {
+export default function Home({ featuredProduct }) {
   return (
     <>
       <HomeSlider />
@@ -93,7 +93,7 @@ export default function Home() {
             lg: 32,
           }}
         >
-          {featuredProduct.map((featuredProduct) => (
+          {featuredProduct?.map((featuredProduct) => (
             <Col
               className="gutter-row gap-2"
               xs={{
@@ -119,4 +119,13 @@ export default function Home() {
 
 Home.getLayout = function getLayout(page) {
   return <RootLayouts>{page}</RootLayouts>;
+};
+
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:3004/productData");
+  const result = await res.json();
+  return {
+    props: { featuredProduct: result },
+    revalidate: 10,
+  };
 };

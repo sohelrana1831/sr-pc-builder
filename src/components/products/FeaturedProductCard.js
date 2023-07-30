@@ -4,32 +4,45 @@ import {
   EllipsisOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import { Avatar, Button, Card, Col, Image, Rate, Row, Typography } from "antd";
+import { Avatar, Button, Card, Col, Rate, Row, Typography } from "antd";
 import router from "next/router";
+import Image from "next/image";
 const { Title, Text } = Typography;
 const { Meta } = Card;
 
 const FeaturedProductCard = ({
+  id,
   imageSrc,
   productName,
   category,
   price,
   status,
-  rating,
+  average_rating,
 }) => (
   <Card
-    style={{ marginTop: "8px" }}
+    style={{ marginTop: "12px", border: "1px solid #ccc" }}
     className="responsive-card"
-    cover={<Image alt={productName} src={imageSrc} />}
+    cover={
+      <Image
+        onClick={() => router.push(`/product/${id}`)}
+        style={{ border: "1px solid #ccc", cursor: "pointer" }}
+        alt={productName}
+        width={500}
+        height={300}
+        responsive
+        src={imageSrc}
+      />
+    }
     actions={[<Text type="success">{status}</Text>, <div>Add To Build</div>]}
   >
-    <Button type="text" onClick={() => router.push(`/product/${productName}`)}>
+    <Button type="text" onClick={() => router.push(`/product/${id}`)}>
       {productName?.slice(0, 26)}
     </Button>
     <Row>
       <Col span={16}>
         {category}
-        <Rate allowHalf disabled defaultValue={rating} />
+        <br />
+        <Rate allowHalf disabled defaultValue={average_rating} />
       </Col>
       <Col span={8}>
         <h1>$ {price}</h1>
