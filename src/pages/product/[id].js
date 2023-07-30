@@ -43,7 +43,7 @@ const ProductDetailPage = ({ product }) => {
       <div style={{ padding: "20px" }}>
         <br />
         <Title level={4}>Key Features:</Title>
-        <List
+        {/* <List
           size="small"
           bordered
           dataSource={Object.entries(product?.keyFeatures).map(
@@ -53,7 +53,7 @@ const ProductDetailPage = ({ product }) => {
             })
           )}
           renderItem={renderItem}
-        />
+        /> */}
         <div style={{ marginTop: "20px" }}>
           <Text strong>Individual Rating: </Text>
           <Rate allowHalf defaultValue={product?.individual_rating} />
@@ -88,36 +88,34 @@ ProductDetailPage.getLayout = function getLayout(page) {
   return <RootLayouts>{page}</RootLayouts>;
 };
 
-// export async function getStaticPaths() {
-//   const res = await fetch("http://localhost:3004/");
-//   const products = await res.json();
-//   console.log(products);
+export const getStaticPaths = async () => {
+  const response = await fetch(`http://localhost:3000/api/product`);
+  const products = await response.json();
+  const paths = products?.map((prod) => ({
+    params: { id: prod._id },
+  }));
+  return {
+    paths,
+    fallback: true,
+  };
+};
 
-//   // Get the paths we want to prerender based on posts
-//   // In production environments, prerender all pages
-//   // (slower builds, but faster initial page load)
-//   const paths = products.map((product) => ({
-//     params: { id: product.id },
-//   }));
-
-//   // { fallback: false } means other routes should 404
-//   return { paths, fallback: false };
-// }
-
-export const getServerSideProps = async (context) => {
+export const getStaticProps = async (context) => {
   const { params } = context;
   try {
-    const res = await fetch(`http://localhost:3000/product/${params.id}`);
+    const res = await fetch(`http://localhost:3000/api/product/${params.id}`);
+    console.log({ res });
     if (!res.ok) {
       throw new Error("Failed to fetch data from the API.");
     }
 
     // Read the response body and parse it as JSON to get the data
     const data = await res.json();
+    console.log({ data });
     // Return the data as props
     return {
       props: {
-        featuredProduct: data,
+        // featuredProduct: data,
       },
     };
   } catch (error) {
