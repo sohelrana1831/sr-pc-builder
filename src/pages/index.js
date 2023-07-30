@@ -12,77 +12,27 @@ const gridStyle = {
   textAlign: "center",
 };
 
-// const featuredProduct = [
-//   {
-//     imageSrc:
-//       "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-//     productName:
-//       "AMD Athlon 200GE AM4 Socket Desktop Processor with Radeon Vega 3 Graphics",
-//     category: "Desktop Processor",
-//     price: 49.99,
-//     status: "In Stock",
-//     rating: 4.5,
-//   },
-//   {
-//     imageSrc:
-//       "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-//     productName: "AMD Athlon 200GE AM4",
-//     category: "Desktop Processor",
-//     price: 49.99,
-//     status: "In Stock",
-//     rating: 4.5,
-//   },
-//   {
-//     imageSrc:
-//       "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-//     productName:
-//       "AMD Athlon 200GE AM4 Socket Desktop Processor with Radeon Vega 3 Graphics",
-//     category: "Desktop Processor",
-//     price: 49.99,
-//     status: "In Stock",
-//     rating: 4.5,
-//   },
-//   {},
-//   {},
-//   {},
-//   {},
-//   {},
-// ];
-
-const categoryOption = [
-  {
-    key: "1",
-    id: "1",
-    link: "cpu-processor",
-    category: "CPU / Processor",
-  },
-  { key: "2", id: "2", link: "motherboard", category: "Motherboard" },
-  { key: "3", id: "3", link: "RAM", category: "RAM" },
-  {
-    key: "4",
-    id: "4",
-    link: "power-supply-unit",
-    category: "Power Supply Unit",
-  },
-  { key: "5", id: "5", link: "storage-device", category: "Storage Device" },
-  { key: "6", id: "6", link: "monitor", category: "Monitor" },
-];
 export default function Home({ featuredProduct }) {
+  const categories = featuredProduct?.map((category) => category.category);
+  const uniqueCategories = [...new Set(categories)];
+  console.log(featuredProduct);
   return (
     <>
       <HomeSlider />
       <Card style={{ marginTop: "8px" }} title="Categories">
-        {categoryOption.map((item) => (
-          <Card.Grid style={gridStyle}>
-            <Button
-              type="text"
-              onClick={() => router.push(`/category/${item.link}`)}
-              key={item.key}
-            >
-              {item.category}
-            </Button>
-          </Card.Grid>
-        ))}
+        {uniqueCategories.map((item) => {
+          return (
+            <Card.Grid style={gridStyle}>
+              <Button
+                type="text"
+                onClick={() => router.push(`/category/${item}`)}
+                key={item}
+              >
+                {item}
+              </Button>
+            </Card.Grid>
+          );
+        })}
       </Card>
       <Card style={{ marginTop: "8px" }} title="Featured Products">
         <Row
@@ -93,7 +43,7 @@ export default function Home({ featuredProduct }) {
             lg: 32,
           }}
         >
-          {featuredProduct?.map((featuredProduct) => (
+          {featuredProduct?.map((product) => (
             <Col
               className="gutter-row gap-2"
               xs={{
@@ -107,7 +57,7 @@ export default function Home({ featuredProduct }) {
               }}
             >
               <div style={style}>
-                <ProductCard {...featuredProduct} />
+                <ProductCard {...product} />
               </div>
             </Col>
           ))}
@@ -122,10 +72,29 @@ Home.getLayout = function getLayout(page) {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:3004/productData");
-  const result = await res.json();
-  return {
-    props: { featuredProduct: result },
-    revalidate: 10,
-  };
+  try {
+    // Fetch data from the API route you created in Next.js
+    const res = await fetch("http://localhost:3000/api/product");
+    if (!res.ok) {
+      throw new Error("Failed to fetch data from the API.");
+    }
+
+    // Read the response body and parse it as JSON to get the data
+    const data = await res.json();
+    // Return the data as props
+    return {
+      props: {
+        featuredProduct: data,
+      },
+      revalidate: 10,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        featuredProduct: null, // or any default value if needed
+      },
+      revalidate: 10,
+    };
+  }
 };

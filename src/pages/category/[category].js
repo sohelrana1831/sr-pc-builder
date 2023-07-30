@@ -48,10 +48,11 @@ const featuredProduct = [
 const CategoryPage = () => {
   const router = useRouter();
   const category = router.query.category;
+  console.log(category);
   return (
     <>
       <Card title={category}>
-        <Row
+        {/* <Row
           gutter={{
             xs: 8,
             sm: 16,
@@ -77,7 +78,7 @@ const CategoryPage = () => {
               </div>
             </Col>
           ))}
-        </Row>
+        </Row> */}
       </Card>
     </>
   );

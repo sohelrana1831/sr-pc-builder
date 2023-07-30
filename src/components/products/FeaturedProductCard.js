@@ -11,7 +11,7 @@ const { Title, Text } = Typography;
 const { Meta } = Card;
 
 const FeaturedProductCard = ({
-  id,
+  _id,
   imageSrc,
   productName,
   category,
@@ -24,7 +24,7 @@ const FeaturedProductCard = ({
     className="responsive-card"
     cover={
       <Image
-        onClick={() => router.push(`/product/${id}`)}
+        onClick={() => router.push(`/product/${_id}`)}
         style={{ border: "1px solid #ccc", cursor: "pointer" }}
         alt={productName}
         width={500}
@@ -35,7 +35,7 @@ const FeaturedProductCard = ({
     }
     actions={[<Text type="success">{status}</Text>, <div>Add To Build</div>]}
   >
-    <Button type="text" onClick={() => router.push(`/product/${id}`)}>
+    <Button type="text" onClick={() => router.push(`/product/${_id}`)}>
       {productName?.slice(0, 26)}
     </Button>
     <Row>
