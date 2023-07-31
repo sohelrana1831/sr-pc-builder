@@ -1,4 +1,10 @@
 {
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "engines": {
+    "node": ">=16"
+  },
   "name": "sr-pc-builder",
   "version": "0.1.0",
   "private": true,
