@@ -95,7 +95,6 @@ export const getStaticProps = async () => {
 
     // Read the response body and parse it as JSON to get the data
     const data = await res.json();
-    // Return the data as props
     return {
       props: {
         featuredProduct: data,
