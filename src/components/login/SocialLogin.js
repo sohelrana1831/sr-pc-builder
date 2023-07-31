@@ -2,8 +2,12 @@ import React from "react";
 import { GoogleOutlined, GithubOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 const { Title } = Typography;
 const SocialLogin = () => {
+  const router = useRouter();
+
+  const { callbackUrl } = router.query;
   return (
     <>
       <>
@@ -14,9 +18,7 @@ const SocialLogin = () => {
               style={{ textAlign: "center", marginRight: "18px" }}
             /> */}
             <GithubOutlined
-              onClick={() =>
-                signIn("github", { callbackUrl: `${process.env.API_URL}/` })
-              }
+              onClick={() => signIn("github", { callbackUrl: callbackUrl })}
             />
           </div>
           <hr />
