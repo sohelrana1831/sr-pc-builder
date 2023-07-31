@@ -43,7 +43,7 @@ const FeaturedProductCard = ({ product }) => {
               dispatch(setComponent(product));
               router.back("/pc-builder");
             } else {
-              router.back("/login");
+              router.push("/login");
             }
           }}
           type="primary"

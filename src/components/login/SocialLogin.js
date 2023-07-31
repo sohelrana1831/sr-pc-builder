@@ -8,6 +8,7 @@ const SocialLogin = () => {
   const router = useRouter();
 
   const { callbackUrl } = router.query;
+  console.log(router);
   return (
     <>
       <>
