@@ -6,28 +6,28 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 const { Header } = Layout;
 // Sample menu items
-const menuItems = [
-  { key: "1", title: "Home", link: "/" },
-  { key: "2", title: "About", link: "/about" },
-  { key: "3", title: "Contact", link: "/contact" },
-];
+const menuItems = [{ key: "1", title: " SR PC Builder", link: "/" }];
 const categoryOption = [
   {
     key: "1",
-    id: "1",
-    link: "cpu-processor",
+    categoryId: "1",
     category: "CPU / Processor",
   },
-  { key: "2", id: "2", link: "motherboard", category: "Motherboard" },
-  { key: "3", id: "3", link: "RAM", category: "RAM" },
+  { key: "2", categoryId: "2", link: "motherboard", category: "Motherboard" },
+  { key: "3", categoryId: "3", link: "RAM", category: "RAM" },
   {
     key: "4",
-    id: "4",
+    categoryId: "4",
     link: "power-supply-unit",
     category: "Power Supply Unit",
   },
-  { key: "5", id: "5", link: "storage-device", category: "Storage Device" },
-  { key: "6", id: "6", link: "monitor", category: "Monitor" },
+  {
+    key: "5",
+    categoryId: "5",
+    link: "storage-device",
+    category: "Storage Device",
+  },
+  { key: "6", categoryId: "6", link: "monitor", category: "Monitor" },
 ];
 
 // Sample dropdown menu items
@@ -35,7 +35,7 @@ const dropdownMenu = (
   <Menu>
     {categoryOption.map((item) => (
       <Menu.Item
-        onClick={() => router.push(`/category/${item.link}`)}
+        onClick={() => router.push(`/category/${item.categoryId}`)}
         key={item.key}
       >
         {item.category}
@@ -55,7 +55,7 @@ const HeaderTop = () => {
         }}
       >
         {/* Your header content goes here */}
-        <div className="logo">Logo</div>
+
         <Menu
           style={{ width: "100%" }}
           theme="dark"
@@ -114,3 +114,31 @@ const HeaderTop = () => {
 };
 
 export default HeaderTop;
+
+export const getStaticProps = async () => {
+  try {
+    // Fetch data from the API route you created in Next.js
+    const res = await fetch("http://localhost:3000/api/product");
+    if (!res.ok) {
+      throw new Error("Failed to fetch data from the API.");
+    }
+
+    // Read the response body and parse it as JSON to get the data
+    const data = await res.json();
+    // Return the data as props
+    return {
+      props: {
+        featuredProduct: data,
+      },
+      revalidate: 5,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        featuredProduct: null, // or any default value if needed
+      },
+      revalidate: 5,
+    };
+  }
+};
