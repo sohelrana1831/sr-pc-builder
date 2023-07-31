@@ -1,8 +1,11 @@
 import HomeSlider from "@/components/home/HomeSlider";
 import RootLayouts from "@/components/layouts/RootLayouts";
 import ProductCard from "@/components/products/FeaturedProductCard";
+import { setCategory } from "@/redux/features/category/categorySlice";
+import { useAppDispatch } from "@/redux/hook";
 import { Button, Card, Col, Row } from "antd";
 import router from "next/router";
+import { useEffect } from "react";
 const style = {
   padding: "2px 0",
 };
@@ -13,22 +16,41 @@ const gridStyle = {
 };
 
 export default function Home({ featuredProduct }) {
-  const categories = featuredProduct?.map((category) => category.category);
-  const uniqueCategories = [...new Set(categories)];
-  console.log(featuredProduct);
+  const dispatch = useAppDispatch();
+
+  const categories = featuredProduct?.map((category) => ({
+    category: category.category,
+    categoryId: category.categoryId,
+  }));
+  // Create a Set to store unique category and categoryId pairs
+  const uniqueCategories = new Set();
+
+  // Filter out the unique category and categoryId pairs
+  const uniqueData = categories?.filter((item) => {
+    const key = `${item.category}_${item.categoryId}`;
+    if (!uniqueCategories.has(key)) {
+      uniqueCategories.add(key);
+      return true;
+    }
+    return false;
+  });
+  useEffect(() => {
+    uniqueData.length > 0 && dispatch(setCategory(uniqueData));
+  }, [uniqueData]);
+
   return (
     <>
       <HomeSlider />
       <Card style={{ marginTop: "8px" }} title="Categories">
-        {uniqueCategories.map((item) => {
+        {uniqueData?.map((item) => {
           return (
             <Card.Grid style={gridStyle}>
               <Button
                 type="text"
-                onClick={() => router.push(`/category/${item}`)}
-                key={item}
+                onClick={() => router.push(`/category/${item.categoryId}`)}
+                key={item.categoryId}
               >
-                {item}
+                {item.category}
               </Button>
             </Card.Grid>
           );
@@ -71,7 +93,7 @@ Home.getLayout = function getLayout(page) {
   return <RootLayouts>{page}</RootLayouts>;
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps = async (cont) => {
   try {
     // Fetch data from the API route you created in Next.js
     const res = await fetch("http://localhost:3000/api/product");
@@ -86,7 +108,7 @@ export const getStaticProps = async () => {
       props: {
         featuredProduct: data,
       },
-      revalidate: 10,
+      revalidate: 5,
     };
   } catch (error) {
     console.error(error);
@@ -94,7 +116,7 @@ export const getStaticProps = async () => {
       props: {
         featuredProduct: null, // or any default value if needed
       },
-      revalidate: 10,
+      revalidate: 5,
     };
   }
 };

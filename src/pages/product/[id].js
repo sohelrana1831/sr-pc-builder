@@ -88,34 +88,32 @@ ProductDetailPage.getLayout = function getLayout(page) {
   return <RootLayouts>{page}</RootLayouts>;
 };
 
-export const getStaticPaths = async () => {
-  const response = await fetch(`http://localhost:3000/api/product`);
-  const products = await response.json();
-  const paths = products?.map((prod) => ({
-    params: { id: prod._id },
-  }));
-  return {
-    paths,
-    fallback: true,
-  };
-};
+// export const getStaticPaths = async () => {
+//   const response = await fetch(`http://localhost:3000/api/product`);
+//   const products = await response.json();
+//   const paths = products?.map((prod) => ({
+//     params: { id: prod._id },
+//   }));
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// };
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const { params } = context;
   try {
     const res = await fetch(`http://localhost:3000/api/product/${params.id}`);
-    console.log({ res });
     if (!res.ok) {
       throw new Error("Failed to fetch data from the API.");
     }
 
     // Read the response body and parse it as JSON to get the data
     const data = await res.json();
-    console.log({ data });
     // Return the data as props
     return {
       props: {
-        // featuredProduct: data,
+        product: data,
       },
     };
   } catch (error) {

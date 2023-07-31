@@ -46,7 +46,6 @@ const dropdownMenu = (
 
 const HeaderTop = () => {
   const { data: session } = useSession();
-  console.log(session);
   return (
     <>
       <Header

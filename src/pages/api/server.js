@@ -12,9 +12,12 @@ let cachedClient = null;
 
 export async function connectToDatabase() {
   if (!cachedClient || !cachedClient.isConnected()) {
-    await client.connect();
+    if (!cachedClient) {
+      cachedClient = await client.connect();
+    } else {
+      await cachedClient.connect();
+    }
     console.log("🛢 DB Connection Success!");
-    cachedClient = client;
   }
 
   return cachedClient;
