@@ -10,12 +10,12 @@ const SocialLogin = () => {
         <div style={{ textAlign: "center", margin: "8px" }}>
           <Title>Login with</Title>
           <div style={{ fontSize: "28px", padding: "8px" }}>
-            <GoogleOutlined
+            {/* <GoogleOutlined
               style={{ textAlign: "center", marginRight: "18px" }}
-            />
+            /> */}
             <GithubOutlined
               onClick={() =>
-                signIn("github", { callbackUrl: "http://localhost:3000/" })
+                signIn("github", { callbackUrl: `${process.env.API_URL}/` })
               }
             />
           </div>

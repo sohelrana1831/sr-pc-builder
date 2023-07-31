@@ -55,7 +55,7 @@ export const getServerSideProps = async (context) => {
   console.log("p data", params);
   try {
     const res = await fetch(
-      `http://localhost:3000/api/category/${params.categoryId}`
+      `${process.env.API_URL}/api/category/${params.categoryId}`
     );
     console.log("first", res);
     if (!res.ok) {

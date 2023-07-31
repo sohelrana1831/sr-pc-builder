@@ -91,7 +91,7 @@ ProductDetailPage.getLayout = function getLayout(page) {
 export const getServerSideProps = async (context) => {
   const { params } = context;
   try {
-    const res = await fetch(`http://localhost:3000/api/product/${params.id}`);
+    const res = await fetch(`${process.env.API_URL}/api/product/${params.id}`);
     if (!res.ok) {
       throw new Error("Failed to fetch data from the API.");
     }
