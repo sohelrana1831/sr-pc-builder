@@ -34,7 +34,7 @@ const CategoryPage = ({ featuredProduct }) => {
               }}
             >
               <div style={style}>
-                <FeaturedProductCard {...product} />
+                <FeaturedProductCard product={product} />
               </div>
             </Col>
           ))}

@@ -88,18 +88,6 @@ ProductDetailPage.getLayout = function getLayout(page) {
   return <RootLayouts>{page}</RootLayouts>;
 };
 
-// export const getStaticPaths = async () => {
-//   const response = await fetch(`http://localhost:3000/api/product`);
-//   const products = await response.json();
-//   const paths = products?.map((prod) => ({
-//     params: { id: prod._id },
-//   }));
-//   return {
-//     paths,
-//     fallback: true,
-//   };
-// };
-
 export const getServerSideProps = async (context) => {
   const { params } = context;
   try {
@@ -120,9 +108,8 @@ export const getServerSideProps = async (context) => {
     console.error(error);
     return {
       props: {
-        featuredProduct: null, // or any default value if needed
+        product: null, // or any default value if needed
       },
-      revalidate: 10,
     };
   }
 };

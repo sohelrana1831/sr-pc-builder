@@ -1,80 +1,190 @@
-import React from "react";
-import { Avatar, Card, Rate } from "antd";
+import React, { useState } from "react";
+import {
+  Avatar,
+  Button,
+  Card,
+  Rate,
+  Tooltip,
+  Typography,
+  Modal,
+  Result,
+} from "antd";
 import RootLayouts from "@/components/layouts/RootLayouts";
+import router, { useRouter } from "next/router";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { CloseOutlined } from "@ant-design/icons";
+import {
+  emptyComponent,
+  removeComponent,
+} from "@/redux/features/PCBuilder/pcBuilderSlice";
 const { Meta } = Card;
-const featuredProduct = [
-  {
-    imageSrc:
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-    productName:
-      "AMD Athlon 200GE AM4 Socket Desktop Processor with Radeon Vega 3 Graphics",
-    category: "Desktop Processor",
-    price: 49.99,
-    status: "In Stock",
-    rating: 4.5,
-  },
-  {
-    imageSrc:
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-    productName: "AMD Athlon 200GE AM4",
-    category: "Desktop Processor",
-    price: 49.99,
-    status: "In Stock",
-    rating: 4.5,
-  },
-  {
-    imageSrc:
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-    productName:
-      "AMD Athlon 200GE AM4 Socket Desktop Processor with Radeon Vega 3 Graphics",
-    category: "Desktop Processor",
-    price: 49.99,
-    status: "In Stock",
-    rating: 4.5,
-  },
-  {},
-  {},
-  {},
-  {},
-  {},
-];
+const { Text } = Typography;
 
-const categoryOption = [
-  { key: "1", id: "1", category: "CPU / Processor" },
-  { key: "2", id: "2", category: "Motherboard" },
-  { key: "3", id: "3", category: "RAM" },
-  { key: "4", id: "4", category: "Power Supply Unit" },
-  { key: "5", id: "5", category: "Storage Device" },
-  { key: "6", id: "6", category: "Monitor" },
-];
-const PcBuilder = () => (
-  <Card title="PC Builder - Build Your Own Computer">
-    {categoryOption.map((category) => (
-      <Card
-        style={{ marginTop: "8px" }}
-        type="inner"
-        title={category.category}
-        extra={<a href="#">Choose</a>}
-        actions={[
-          <div>$ 1525.00</div>,
-          <div>Category</div>,
-          <Rate allowHalf disabled defaultValue={4.5} />,
-        ]}
+const PcBuilder = ({ featuredProduct }) => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const { components } = useAppSelector((state) => state.pcBuilder);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const categories = featuredProduct?.map((category) => ({
+    category: category.category,
+    categoryId: category.categoryId,
+  }));
+  // Create a Set to store unique category and categoryId pairs
+  const uniqueCategories = new Set();
+
+  // Filter out the unique category and categoryId pairs
+  const uniqueData = categories?.filter((item) => {
+    const key = `${item.category}_${item.categoryId}`;
+    if (!uniqueCategories.has(key)) {
+      uniqueCategories.add(key);
+      return true;
+    }
+    return false;
+  });
+  return (
+    <Card title="PC Builder - Build Your Own Computer">
+      {uniqueData?.map((category) => {
+        const component = components?.find(
+          (comp) => comp.categoryId === category.categoryId
+        );
+        return (
+          <Card
+            style={{ marginTop: "8px" }}
+            type="inner"
+            title={category.category}
+            extra={
+              <>
+                {category.categoryId === component?.categoryId ? (
+                  <div>
+                    <Tooltip title="Remove">
+                      <Button
+                        danger
+                        icon={<CloseOutlined />}
+                        onClick={() => dispatch(removeComponent(component))}
+                      />
+                    </Tooltip>
+                  </div>
+                ) : (
+                  <Button
+                    onClick={() =>
+                      router.push(`/category/${category?.categoryId}`)
+                    }
+                    type="primary"
+                    className="bg-sky-800"
+                  >
+                    Choose/Select
+                  </Button>
+                )}
+              </>
+            }
+            actions={[
+              <div> $ {component?.price}</div>,
+              <Text type="success">{component?.status}</Text>,
+              <Rate
+                allowHalf
+                disabled
+                defaultValue={0}
+                value={component?.average_rating}
+              />,
+            ]}
+          >
+            <Meta
+              avatar={
+                <Avatar shape="square" size="large" src={component?.imageSrc} />
+              }
+              title={component?.productName}
+              description={component?.description}
+            />
+          </Card>
+        );
+      })}
+      <br />
+      {console.log(uniqueData?.length, components?.length)}
+      <Button
+        onClick={() => setIsModalOpen(true)}
+        disabled={
+          uniqueData?.length > 0 && uniqueData?.length != components?.length
+        }
+        type="primary"
+        className="h-12"
       >
-        <Meta
-          avatar={
-            <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />
-          }
-          title="Card title"
-          description="This is the description"
+        Complete Build
+      </Button>
+      <Modal
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={false}
+      >
+        <Result
+          status="success"
+          title="You have successfully built your pc!"
+          subTitle="You can build more pc as your desired with favorite components!"
+          extra={[
+            <Button
+              onClick={() => {
+                dispatch(emptyComponent());
+                setIsModalOpen(false);
+                router.push("/");
+              }}
+              type="primary"
+              key="home"
+            >
+              Go Home
+            </Button>,
+            <Button
+              key="build_again"
+              onClick={() => {
+                dispatch(emptyComponent());
+                setIsModalOpen(false);
+              }}
+            >
+              Build Again
+            </Button>,
+          ]}
         />
-      </Card>
-    ))}
-  </Card>
-);
+      </Modal>
+    </Card>
+  );
+};
 
 export default PcBuilder;
 
 PcBuilder.getLayout = function getLayout(page) {
   return <RootLayouts>{page}</RootLayouts>;
+};
+
+export const getServerSideProps = async () => {
+  try {
+    // Fetch data from the API route you created in Next.js
+    const res = await fetch("http://localhost:3000/api/product");
+    if (!res.ok) {
+      throw new Error("Failed to fetch data from the API.");
+    }
+
+    // Read the response body and parse it as JSON to get the data
+    const data = await res.json();
+    // Return the data as props
+    return {
+      props: {
+        featuredProduct: data,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        featuredProduct: null, // or any default value if needed
+      },
+    };
+  }
 };

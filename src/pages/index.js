@@ -1,11 +1,8 @@
 import HomeSlider from "@/components/home/HomeSlider";
 import RootLayouts from "@/components/layouts/RootLayouts";
 import ProductCard from "@/components/products/FeaturedProductCard";
-import { setCategory } from "@/redux/features/category/categorySlice";
-import { useAppDispatch } from "@/redux/hook";
 import { Button, Card, Col, Row } from "antd";
 import router from "next/router";
-import { useEffect } from "react";
 const style = {
   padding: "2px 0",
 };
@@ -16,8 +13,6 @@ const gridStyle = {
 };
 
 export default function Home({ featuredProduct }) {
-  const dispatch = useAppDispatch();
-
   const categories = featuredProduct?.map((category) => ({
     category: category.category,
     categoryId: category.categoryId,
@@ -34,9 +29,6 @@ export default function Home({ featuredProduct }) {
     }
     return false;
   });
-  useEffect(() => {
-    uniqueData.length > 0 && dispatch(setCategory(uniqueData));
-  }, [uniqueData]);
 
   return (
     <>
@@ -79,7 +71,7 @@ export default function Home({ featuredProduct }) {
               }}
             >
               <div style={style}>
-                <ProductCard {...product} />
+                <ProductCard product={product} />
               </div>
             </Col>
           ))}
@@ -93,7 +85,7 @@ Home.getLayout = function getLayout(page) {
   return <RootLayouts>{page}</RootLayouts>;
 };
 
-export const getStaticProps = async (cont) => {
+export const getStaticProps = async () => {
   try {
     // Fetch data from the API route you created in Next.js
     const res = await fetch("http://localhost:3000/api/product");
