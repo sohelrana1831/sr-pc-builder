@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Card, Checkbox, Col, Form, Image, Input, Row } from "antd";
 import SocialLogin from "@/components/login/SocialLogin";
+import Link from "next/link";
 
 const onFinish = (values) => {
   console.log("Success:", values);
@@ -24,6 +25,16 @@ const Login = () => (
           <Card
             style={{ minHeight: "50vh", marginTop: "20%", background: "#ccc" }}
           >
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "#000",
+                textAlign: "center",
+              }}
+              href="/"
+            >
+              <items>SR PC Builder</items>
+            </Link>
             <SocialLogin title={"login"} />
             <Form
               name="basic"

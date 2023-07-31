@@ -25,8 +25,8 @@ const RootLayouts = ({ children }) => {
           {children}
         </Content>
         <Footer className="app-footer">
-          {/* Your footer content goes here */}© {new Date().getFullYear()} Your
-          Company Name. All rights reserved.
+          {/* Your footer content goes here */}© {new Date().getFullYear()} SR
+          PC Builder . All rights reserved.
         </Footer>
       </Layout>
     </>
