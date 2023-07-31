@@ -12,7 +12,7 @@ export const authOptions = {
     // ...add more providers here
   ],
   pages: {
-    signIn: `${process.env.API_URL}/login`,
+    signIn: `https://sr-pc-builder-sohelrana1831.vercel.app/login`,
   },
 };
 
